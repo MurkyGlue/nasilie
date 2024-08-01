@@ -1,0 +1,15 @@
+D:\nasilie\sqrt\bin\Debug\net6.0\sqrt.exe
+D:\nasilie\sqrt\bin\Debug\net6.0\sqrt.deps.json
+D:\nasilie\sqrt\bin\Debug\net6.0\sqrt.runtimeconfig.json
+D:\nasilie\sqrt\bin\Debug\net6.0\sqrt.dll
+D:\nasilie\sqrt\bin\Debug\net6.0\sqrt.pdb
+D:\nasilie\sqrt\obj\Debug\net6.0\sqrt.csproj.AssemblyReference.cache
+D:\nasilie\sqrt\obj\Debug\net6.0\sqrt.GeneratedMSBuildEditorConfig.editorconfig
+D:\nasilie\sqrt\obj\Debug\net6.0\sqrt.AssemblyInfoInputs.cache
+D:\nasilie\sqrt\obj\Debug\net6.0\sqrt.AssemblyInfo.cs
+D:\nasilie\sqrt\obj\Debug\net6.0\sqrt.csproj.CoreCompileInputs.cache
+D:\nasilie\sqrt\obj\Debug\net6.0\sqrt.dll
+D:\nasilie\sqrt\obj\Debug\net6.0\refint\sqrt.dll
+D:\nasilie\sqrt\obj\Debug\net6.0\sqrt.pdb
+D:\nasilie\sqrt\obj\Debug\net6.0\sqrt.genruntimeconfig.cache
+D:\nasilie\sqrt\obj\Debug\net6.0\ref\sqrt.dll
