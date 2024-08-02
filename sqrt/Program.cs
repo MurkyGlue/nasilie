@@ -7,24 +7,21 @@
             double b = Convert.ToDouble(Console.ReadLine()); //49
             int c = Convert.ToInt32(Console.ReadLine()); //2
             double s = 1.0;
-            double i = 0;
-            string r = "";
+            double r = 0;
 
-            for(int v = 0; v < 10; v++)
+            while(Convert.ToString(r).Length < 5)
             {
-                if (Math.Pow(i, c) < b)
+                if (Math.Pow(r, c) < b)
                 {
-                    i += s;
+                    r += s;
                 }
-                else if (Math.Pow(i, c) == b)
+                else if (Math.Pow(r, c) == b)
                 {
-                    r += i;
                     break;
                 }
                 else
                 {
-                    i -= s;
-                    r += i;
+                    r -= s;
                     s /= 10;
                 }
             }
