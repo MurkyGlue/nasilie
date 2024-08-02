@@ -4,12 +4,12 @@
     {
         static void Main(string[] args)
         {
-            double b = Convert.ToDouble(Console.ReadLine()); //49
-            int c = Convert.ToInt32(Console.ReadLine()); //2
-            double s = 1.0;
-            double r = 0;
+            double b = Convert.ToDouble(Console.ReadLine()); //start number
+            int c = Convert.ToInt32(Console.ReadLine()); // number of degree
+            double s = 1.0; //step
+            double r = 0; //result
 
-            while(Convert.ToString(r).Length < 5)
+            for (int i = 0; i < 1000; i++)
             {
                 if (Math.Pow(r, c) < b)
                 {
