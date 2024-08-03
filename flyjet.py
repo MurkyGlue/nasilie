@@ -6,78 +6,100 @@ height = 720
 
 screen = pygame.display.set_mode((width, height))
 
-hole = [random.randint(0, 1200), height/2-4]
-holeSize = [4, 6]
+baseSize = [300, 50]
+base = [width//2 - baseSize[0]//2, height-baseSize[1]-200]
 
-hole2 = [random.randint(0, 1200), height/2-4]
-holeSize2 = [6, 6]
+block1 = [width, height-2*baseSize[1]-200]
+blockSize1 = baseSize[0]
 
-char = [565, 550]
-charSize = [150, 80]
-wallSpeed = 0.2
-charSpeed = 0
-wallSpeed2 = 0.2
+block2 = [-baseSize[0], height-2*baseSize[1]-200]
+blockSize2 = baseSize[0]
 
-jetcol = (255, 0, 0)
-wallcol = (0, 255, 0)
+
 screencol = (100, 100, 100)
+blockcol1 = (255, 0, 0)
+blockcol2 = (0, 255, 0)
 
-move = False
+blockSpeed = 0.5
+
+switch = True
+b = True
+
 
 def move1():
-	global holeSize, wallSpeed, hole
-	holeSize[0] += wallSpeed
-	holeSize[1] += wallSpeed*(holeSize[1]/holeSize[0])
-	hole[0] -= wallSpeed/2 + charSpeed
-	hole[1] -= (wallSpeed*(holeSize[1]/holeSize[0]))/2
-	wallSpeed += 0.0005
-	if holeSize[0] > width+20:
-		hole = [random.randint(0, 1200), height/2-4]
-		holeSize = [4, 6]
-		wallSpeed = 0.2
-	elif holeSize[1] > height+20:
-		if not hole[0] < char[0] < char[0]+charSize[0] < hole[0]+holeSize[0]:
-			print('end')
-		
+	block1[0] -= blockSpeed
+
 def move2():
-	global holeSize2, wallSpeed2, hole2
-	holeSize2[0] += wallSpeed2
-	holeSize2[1] += wallSpeed2*(holeSize2[1]/holeSize2[0])
-	hole2[0] -= wallSpeed2/2 + charSpeed
-	hole2[1] -= (wallSpeed2*(holeSize2[1]/holeSize2[0]))/2
-	wallSpeed2 += 0.0005
-	if holeSize2[0] > width+20:
-		hole2 = [random.randint(0, 1200), height/2-4]
-		holeSize2 = [4, 6]
-		wallSpeed2 = 0.2
-	elif holeSize2[1] > height+20:
-		if not hole2[0] < char[0] < char[0]+charSize[0] < hole2[0]+holeSize2[0]:
-			print('end')
+	block2[0] += blockSpeed
+
+def back1():
+	global block1
+	block1 = [width, height-3*baseSize[1]-200]
+
+def back2():
+	global block2
+	block2 = [-blockSize2, height-3*baseSize[1]-200]
+
+def step():
+	base[1] += baseSize[1]
+	block1[1] += baseSize[1]
+	block2[1] += baseSize[1]
+
+def cut1():
+	global blockSize1, blockSize2, block1, block2, b
+	if b:
+		b = False
+		if block1[0] < base[0]:
+			blockSize1 -= base[0] - block1[0]
+			block1[0] = base[0]
+		elif block1[0]+blockSize1 > base[0]+baseSize[0]:
+			blockSize1 += (base[0]+baseSize[0]) - (block1[0]+blockSize1)
+	else:
+		if block1[0] < block2[0]:
+			blockSize1 -= block2[0] - block1[0]
+			block1[0] = block2[0]
+		elif block1[0]+blockSize1 > block2[0]+blockSize2:									#оно должно работать, но не работает
+			blockSize1 += (block2[0]+blockSize2) - (block1[0]+blockSize1)
+	
+def cut2():
+	global blockSize1, blockSize2, block1, block2
+
+	if block2[0] < block1[0]:
+		blockSize2 -= block1[0] - block2[0]
+		block2[0] = block1[0]
+	elif block2[0]+blockSize2 > block1[0]+blockSize1:
+		blockSize2 += (block1[0]+blockSize1) - (block2[0]+blockSize2)
+
+
+
 
 pygame.init()
 while True:
 	screen.fill(screencol)
-	pygame.draw.rect(screen, wallcol, [hole, holeSize], 10)
-	pygame.draw.rect(screen, wallcol, [hole2, holeSize2], 10)
-	pygame.draw.rect(screen, jetcol, [char, charSize])
+	pygame.draw.rect(screen, blockcol2, (base, baseSize))
+	pygame.draw.rect(screen, blockcol1, (block1, [blockSize1, baseSize[1]]))
+	pygame.draw.rect(screen, blockcol2, (block2, [blockSize2, baseSize[1]]))
 	
 	pygame.display.flip()
 	
-	move1()
-	move2()
+	if switch:
+		move1()
+	else:
+		move2()
 
-	
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()
 		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_d:
-				charSpeed = 0.3
-			if event.key == pygame.K_a:
-				charSpeed = -0.3
-		if event.type == pygame.KEYUP:
-			if event.key == pygame.K_d or event.key == pygame.K_a:
-				charSpeed = 0
+			if event.key == pygame.K_SPACE:
+				switch = not switch
+				if switch: block1[1] -= 2*baseSize[1]; cut2(); back1()
+				else: block2[1] -= 2*baseSize[1]; cut1(); back2()
+				step()
+
+				
+
+
 
 	
 	
