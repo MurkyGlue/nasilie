@@ -5,9 +5,15 @@ width = 1280
 height = 720
 
 screen = pygame.display.set_mode((width, height))
+scale = pygame.image.load('SCALE.png')
+
+scaleY = -2480
 
 baseSize = [300, 50]
 base = [width//2 - baseSize[0]//2, height-baseSize[1]-200]
+
+gr = [0, base[1]+baseSize[1]]
+grSize = [width, height]
 
 block1 = [width, height-2*baseSize[1]-200]
 blockSize1 = baseSize[0]
@@ -23,6 +29,7 @@ screencol = (100, 100, 100)
 blockcol1 = (255, 0, 0)
 blockcol2 = (0, 255, 0)
 blockcol3 = (0, 0, 255)
+grcol = (0, 105, 0)
 
 blockSpeed = 0.5
 
@@ -47,11 +54,15 @@ def back2():
 	block2 = [-blockSize2, height-3*baseSize[1]-200]
 
 def step():
+	global scaleY
 	base[1] += baseSize[1]
+	gr[1] += baseSize[1]
 	block1[1] += baseSize[1]
 	block2[1] += baseSize[1]
 	for i in range(len(blocks)):
 		blocks[i][1] += baseSize[1]
+	scaleY += baseSize[1]
+	
 
 def cut1():
 	global blockSize1, blockSize2, block1, block2, b
@@ -66,7 +77,7 @@ def cut1():
 		if block1[0] < block2[0]:
 			blockSize1 -= block2[0] - block1[0]
 			block1[0] = block2[0]
-		if block1[0]+blockSize1 > block2[0]+blockSize2:									#оно должно работать, но не работает
+		if block1[0]+blockSize1 > block2[0]+blockSize2:									
 			blockSize1 += (block2[0]+blockSize2) - (block1[0]+blockSize1)
 	
 def cut2():
@@ -79,11 +90,13 @@ def cut2():
 		blockSize2 += (block1[0]+blockSize1) - (block2[0]+blockSize2)
 	
 def dead():
-	global blockSpeed, alive
+	global blockSpeed, alive, scaleY
 	blockSpeed = 0
 	alive = False
 	while base[1] > height-baseSize[1]-200:
 		screen.fill(screencol)
+		screen.blit(scale, (base[0]+baseSize[0], scaleY))
+		pygame.draw.rect(screen, grcol, (gr, grSize))
 		pygame.draw.rect(screen, blockcol2, (base, baseSize))
 		pygame.draw.rect(screen, blockcol1, (block1, [blockSize1, baseSize[1]]))
 		pygame.draw.rect(screen, blockcol2, (block2, [blockSize2, baseSize[1]]))
@@ -92,6 +105,10 @@ def dead():
 			pygame.draw.rect(screen, blockcol3, (blocks[i], [sizes[i], baseSize[1]]))
 		pygame.display.flip()
 		base[1] -= 0.3
+		gr[1] -= 0.3
+		scaleY -= 0.3
+		if switch: block2[1] -= 0.3
+		else: block1[1] -= 0.3
 	pygame.quit()
 
 
@@ -99,6 +116,8 @@ def dead():
 pygame.init()
 while True:
 	screen.fill(screencol)
+	screen.blit(scale, (base[0]+baseSize[0], scaleY))
+	pygame.draw.rect(screen, grcol, (gr, grSize))
 	pygame.draw.rect(screen, blockcol2, (base, baseSize))
 	pygame.draw.rect(screen, blockcol1, (block1, [blockSize1, baseSize[1]]))
 	pygame.draw.rect(screen, blockcol2, (block2, [blockSize2, baseSize[1]]))
