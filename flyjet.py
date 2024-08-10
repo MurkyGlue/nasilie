@@ -30,13 +30,19 @@ blockcol1 = (255, 0, 0)
 blockcol2 = (0, 255, 0)
 blockcol3 = (0, 0, 255)
 grcol = (0, 105, 0)
+sccol = (0, 0, 0)
 
 blockSpeed = 0.5
+con = 1
 
 switch = True
 alive = True
 b = True
 c = False
+
+#pygame.font.init()
+
+#count = pygame.font.Font(None, 50)
 
 
 def move1():
@@ -54,7 +60,7 @@ def back2():
 	block2 = [-blockSize2, height-3*baseSize[1]-200]
 
 def step():
-	global scaleY
+	global scaleY, con
 	base[1] += baseSize[1]
 	gr[1] += baseSize[1]
 	block1[1] += baseSize[1]
@@ -62,6 +68,7 @@ def step():
 	for i in range(len(blocks)):
 		blocks[i][1] += baseSize[1]
 	scaleY += baseSize[1]
+	con += 1
 	
 
 def cut1():
@@ -117,6 +124,7 @@ pygame.init()
 while True:
 	screen.fill(screencol)
 	screen.blit(scale, (base[0]+baseSize[0], scaleY))
+	#screen.blit(count.render(str(con), True, sccol), (640, 50))
 	pygame.draw.rect(screen, grcol, (gr, grSize))
 	pygame.draw.rect(screen, blockcol2, (base, baseSize))
 	pygame.draw.rect(screen, blockcol1, (block1, [blockSize1, baseSize[1]]))
