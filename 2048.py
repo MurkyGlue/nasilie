@@ -19,10 +19,9 @@ mat = [[0, 0, 0, 0],
        [0, 2, 0, 2]]
 
 free = 3
-num = 0
-prenum = 0
 
 def down():
+    global free
     for i in range(len(mat)):
         for j in range(len(mat[i])):
             if mat[3-j][i] != 0:
@@ -69,9 +68,53 @@ def up():
                 free += 1
         free = 0
 
+def left():
+    global free
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            if mat[i][j] != 0:
+                b = mat[i][j]
+                mat[i][j] = 0
+                mat[i][free] = b
+                free += 1
+        free = 0
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            if mat[i][j-1] == mat[i][j]:
+                mat[i][j] *= 2
+                mat[i][j-1] = 0
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            if mat[i][j] != 0:
+                b = mat[i][j]
+                mat[i][j] = 0
+                mat[i][free] = b
+                free += 1
+        free = 0
 
-            
-
+def right():
+    global free
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            if mat[i][3-j] != 0:
+                b = mat[i][3-j]
+                mat[i][3-j] = 0
+                mat[i][free] = b
+                free -= 1
+        free = 3
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            if mat[i][2-j] == mat[i][3-j]:
+                mat[i][3-j] *= 2
+                mat[i][2-j] = 0
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            if mat[i][3-j] != 0:
+                b = mat[i][3-j]
+                mat[i][3-j] = 0
+                mat[i][free] = b
+                free -= 1
+        free = 3
 
 
 
@@ -90,9 +133,9 @@ while True:
     elif a == 's':
         down()
     elif a == 'd':
-        continue
+        right()
     elif a == 'a':
-        continue
+        left()
     else:
         break
 
