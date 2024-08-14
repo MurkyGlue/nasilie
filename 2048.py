@@ -11,24 +11,25 @@ block32img = pygame.image.load('32.png')
 block64img = pygame.image.load('64.png')
 
 cells = ((0,0), (200, 0), (400,0), (600, 0), (0,200), (200, 200), (400,200), (600, 200), (0,400), (200, 400), (400,400), (600, 400), (0,600), (200, 600), (400,600), (600, 600))
-blocks = []
+freeBl = []
 
-mat = [[0, 0, 0, 0],
-       [0, 0, 0, 0],
+mat = [[2, 2, 0, 2],
+       [2, 2, 0, 0],
        [0, 2, 2, 0],
        [0, 2, 0, 2]]
 
-free = 3
+
 
 def down():
-    global free
+    global free, freeBl
+    free = 3
     for i in range(len(mat)):
         for j in range(len(mat[i])):
             if mat[3-j][i] != 0:
                 b = mat[3-j][i]
                 mat[3-j][i] = 0
                 mat[free][i] = b
-                free -= 1     
+                free -= 1   
         free = 3
     for i in range(len(mat)):
         for j in range(len(mat[i])):
@@ -41,11 +42,14 @@ def down():
                 b = mat[3-j][i]
                 mat[3-j][i] = 0
                 mat[free][i] = b
-                free -= 1     
+                free -= 1
+            if mat[i][j] == 0:
+                freeBl.append([i, j])
         free = 3
    
 def up():
-    global free
+    global free, freeBl
+    free = 0
     for i in range(len(mat)):
         for j in range(len(mat[i])):
             if mat[j][i] != 0:
@@ -66,10 +70,13 @@ def up():
                 mat[j][i] = 0
                 mat[free][i] = b
                 free += 1
+            if mat[i][j] == 0:
+                freeBl.append([i, j])
         free = 0
 
 def left():
-    global free
+    global free, freeBl
+    free = 0
     for i in range(len(mat)):
         for j in range(len(mat[i])):
             if mat[i][j] != 0:
@@ -90,10 +97,13 @@ def left():
                 mat[i][j] = 0
                 mat[i][free] = b
                 free += 1
+            if mat[i][j] == 0:
+                freeBl.append([i, j])
         free = 0
 
 def right():
-    global free
+    global free, freeBl
+    free = 3
     for i in range(len(mat)):
         for j in range(len(mat[i])):
             if mat[i][3-j] != 0:
@@ -114,7 +124,14 @@ def right():
                 mat[i][3-j] = 0
                 mat[i][free] = b
                 free -= 1
+            if mat[i][j] == 0:
+                freeBl.append([i, j])
         free = 3
+
+def fill():
+    global freeBl
+    ch = random.randint(0, len(freeBl)-1)
+    mat[freeBl[ch][0]][freeBl[ch][1]] = 2
 
 
 
@@ -138,6 +155,8 @@ while True:
         left()
     else:
         break
+
+    fill()
 
     
 
