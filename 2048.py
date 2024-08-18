@@ -1,7 +1,8 @@
 import pygame
 import random
+import math
 
-#screen = pygame.display.set_mode((800, 800))
+screen = pygame.display.set_mode((800, 800))
 
 block2img = pygame.image.load('2.png')
 block4img = pygame.image.load('4.png')
@@ -12,11 +13,12 @@ block64img = pygame.image.load('64.png')
 
 cells = ((0,0), (200, 0), (400,0), (600, 0), (0,200), (200, 200), (400,200), (600, 200), (0,400), (200, 400), (400,400), (600, 400), (0,600), (200, 600), (400,600), (600, 600))
 freeBl = []
+nums = (block2img, block4img, block8img, block16img, block32img, block64img)
 
-mat = [[2, 2, 0, 2],
-       [2, 2, 0, 0],
-       [0, 2, 2, 0],
-       [0, 2, 0, 2]]
+mat = [[0, 0, 2, 0],
+       [0, 0, 0, 0],
+       [0, 0, 2, 0],
+       [0, 0, 0, 0]]
 
 
 
@@ -132,32 +134,35 @@ def fill():
     global freeBl
     ch = random.randint(0, len(freeBl)-1)
     mat[freeBl[ch][0]][freeBl[ch][1]] = 2
+    freeBl = []
 
 
 
-#pygame.init()
+pygame.init()
 while True:
-    #screen.fill((100, 100, 100))
+    print(freeBl)
+    screen.fill((100, 100, 100))
     for i in range(len(mat)):
         for j in range(len(mat[i])):
-            print(mat[i][j], end = ' ')
-        print()
-    print()
+            if mat[i][j] != 0:
+                h = int(math.log(mat[i][j], 2))-1
+                screen.blit(nums[h], cells[i*4+j])
+    pygame.display.flip()
 
-    a = input()
-    if a == 'w':
-        up()
-    elif a == 's':
-        down()
-    elif a == 'd':
-        right()
-    elif a == 'a':
-        left()
-    else:
-        break
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+		
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_s:
+                down()
+            if event.key == pygame.K_w:
+                up()
+            if event.key == pygame.K_d:
+                right()
+            if event.key == pygame.K_a:
+                left()
+            fill()
 
-    fill()
-
-    
 
 
