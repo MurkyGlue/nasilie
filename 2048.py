@@ -20,6 +20,9 @@ mat = [[0, 0, 2, 0],
        [0, 0, 2, 0],
        [0, 0, 0, 0]]
 
+play = True
+count = 0
+
 
 
 def down():
@@ -132,21 +135,28 @@ def right():
 
 def fill():
     global freeBl
-    ch = random.randint(0, len(freeBl)-1)
-    mat[freeBl[ch][0]][freeBl[ch][1]] = 2
-    freeBl = []
+    if len(freeBl) > 0:
+        ch = random.randint(0, len(freeBl)-1)
+        mat[freeBl[ch][0]][freeBl[ch][1]] = 2
+        freeBl = []
 
+def check():
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            if len(freeBl) == 0:
+                if mat[i][j] == mat[i][j-1] or mat[j][i] == mat[j][i-1]:
+                    return True
+                return False
+            return True
 
 
 pygame.init()
-while True:
-    print(freeBl)
+while play:
     screen.fill((100, 100, 100))
     for i in range(len(mat)):
         for j in range(len(mat[i])):
             if mat[i][j] != 0:
-                h = int(math.log(mat[i][j], 2))-1
-                screen.blit(nums[h], cells[i*4+j])
+                screen.blit(nums[int(math.log(mat[i][j], 2))-1], cells[i*4+j])
     pygame.display.flip()
 
     for event in pygame.event.get():
@@ -162,6 +172,7 @@ while True:
                 right()
             if event.key == pygame.K_a:
                 left()
+            play = check()
             fill()
 
 
