@@ -10,14 +10,19 @@ block8img = pygame.image.load('8.png')
 block16img = pygame.image.load('16.png')
 block32img = pygame.image.load('32.png')
 block64img = pygame.image.load('64.png')
+block128img = pygame.image.load('128.png')
+block256img = pygame.image.load('256.png')
+block512img = pygame.image.load('512.png')
+block1024img = pygame.image.load('1024.png')
+block2048img = pygame.image.load('2048.png')
 
 cells = ((0,0), (200, 0), (400,0), (600, 0), (0,200), (200, 200), (400,200), (600, 200), (0,400), (200, 400), (400,400), (600, 400), (0,600), (200, 600), (400,600), (600, 600))
 freeBl = []
-nums = (block2img, block4img, block8img, block16img, block32img, block64img)
+nums = (block2img, block4img, block8img, block16img, block32img, block64img, block128img, block256img, block512img, block1024img, block2048img)
 
-mat = [[0, 0, 2, 0],
+mat = [[0, 0, 0, 0],
        [0, 0, 0, 0],
-       [0, 0, 2, 0],
+       [0, 0, 0, 0],
        [0, 0, 0, 0]]
 
 play = True
@@ -37,7 +42,7 @@ def down():
                 free -= 1   
         free = 3
     for i in range(len(mat)):
-        for j in range(len(mat[i])):
+        for j in range(len(mat[i])-1):
             if mat[2-j][i] == mat[3-j][i]:
                 mat[3-j][i] *= 2
                 mat[2-j][i] = 0
@@ -64,10 +69,10 @@ def up():
                 free += 1
         free = 0
     for i in range(len(mat)):
-        for j in range(len(mat[i])):
-            if mat[j-1][i] == mat[j][i]:
+        for j in range(len(mat[i])-1):
+            if mat[j+1][i] == mat[j][i]:
                 mat[j][i] *= 2
-                mat[j-1][i] = 0
+                mat[j+1][i] = 0
     for i in range(len(mat)):
         for j in range(len(mat[i])):
             if mat[j][i] != 0:
@@ -91,10 +96,10 @@ def left():
                 free += 1
         free = 0
     for i in range(len(mat)):
-        for j in range(len(mat[i])):
-            if mat[i][j-1] == mat[i][j]:
+        for j in range(len(mat[i])-1):
+            if mat[i][j+1] == mat[i][j]:
                 mat[i][j] *= 2
-                mat[i][j-1] = 0
+                mat[i][j+1] = 0
     for i in range(len(mat)):
         for j in range(len(mat[i])):
             if mat[i][j] != 0:
@@ -118,7 +123,7 @@ def right():
                 free -= 1
         free = 3
     for i in range(len(mat)):
-        for j in range(len(mat[i])):
+        for j in range(len(mat[i])-1):
             if mat[i][2-j] == mat[i][3-j]:
                 mat[i][3-j] *= 2
                 mat[i][2-j] = 0
@@ -143,6 +148,9 @@ def fill():
 def check():
     for i in range(len(mat)):
         for j in range(len(mat[i])):
+            if mat[i][j] == 2048:
+                print('you win')
+                return False
             if len(freeBl) == 0:
                 if mat[i][j] == mat[i][j-1] or mat[j][i] == mat[j][i-1]:
                     return True
@@ -174,6 +182,7 @@ while play:
                 left()
             play = check()
             fill()
+            
 
 
 
