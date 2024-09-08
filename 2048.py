@@ -17,7 +17,7 @@ block1024img = pygame.image.load('1024.png')
 block2048img = pygame.image.load('2048.png')
 
 cells = ((0,0), (200, 0), (400,0), (600, 0), (0,200), (200, 200), (400,200), (600, 200), (0,400), (200, 400), (400,400), (600, 400), (0,600), (200, 600), (400,600), (600, 600))
-freeBl = []
+freeBl = [[0, 0], [0, 1], [0, 2], [0, 3], [1, 0], [1, 1], [1, 2], [1, 3], [2, 0], [2, 1], [2, 2], [2, 3], [3, 0], [3, 1], [3, 2], [3, 3]]
 nums = (block2img, block4img, block8img, block16img, block32img, block64img, block128img, block256img, block512img, block1024img, block2048img)
 
 mat = [[0, 0, 0, 0],
@@ -53,8 +53,6 @@ def down():
                 mat[3-j][i] = 0
                 mat[free][i] = b
                 free -= 1
-            if mat[i][j] == 0:
-                freeBl.append([i, j])
         free = 3
    
 def up():
@@ -80,8 +78,6 @@ def up():
                 mat[j][i] = 0
                 mat[free][i] = b
                 free += 1
-            if mat[i][j] == 0:
-                freeBl.append([i, j])
         free = 0
 
 def left():
@@ -107,8 +103,6 @@ def left():
                 mat[i][j] = 0
                 mat[i][free] = b
                 free += 1
-            if mat[i][j] == 0:
-                freeBl.append([i, j])
         free = 0
 
 def right():
@@ -134,27 +128,29 @@ def right():
                 mat[i][3-j] = 0
                 mat[i][free] = b
                 free -= 1
-            if mat[i][j] == 0:
-                freeBl.append([i, j])
         free = 3
 
 def fill():
     global freeBl
     if len(freeBl) > 0:
         ch = random.randint(0, len(freeBl)-1)
-        mat[freeBl[ch][0]][freeBl[ch][1]] = 2
-        freeBl = []
+        mat[freeBl[ch][0]][freeBl[ch][1]] = 2 
+    freeBl = []
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            if mat[i][j] == 0:
+                freeBl.append([i, j])
+    print(freeBl, '\n')
 
 def check():
     for i in range(len(mat)):
-        for j in range(len(mat[i])):
+        for j in range(len(mat[i])-1):
             if mat[i][j] == 2048:
                 print('you win')
                 return False
             if len(freeBl) == 0:
-                if mat[i][j] == mat[i][j-1] or mat[j][i] == mat[j][i-1]:
-                    return True
-                return False
+                if not (mat[i][j] == mat[i][j+1] or mat[j][i] == mat[j][i+1]):
+                    return False
             return True
 
 
@@ -182,6 +178,7 @@ while play:
                 left()
             play = check()
             fill()
+            
             
 
 
