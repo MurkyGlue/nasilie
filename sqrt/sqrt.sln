@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sqrt", "sqrt.csproj", "{565DE17B-E33F-48FF-8F7E-710E5F50482C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "raspisanie", "..\raspisanie\raspisanie.csproj", "{C61F76C4-19E1-4CA2-B453-B6266DCDC8F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{565DE17B-E33F-48FF-8F7E-710E5F50482C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{565DE17B-E33F-48FF-8F7E-710E5F50482C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{565DE17B-E33F-48FF-8F7E-710E5F50482C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C61F76C4-19E1-4CA2-B453-B6266DCDC8F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C61F76C4-19E1-4CA2-B453-B6266DCDC8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C61F76C4-19E1-4CA2-B453-B6266DCDC8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C61F76C4-19E1-4CA2-B453-B6266DCDC8F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
