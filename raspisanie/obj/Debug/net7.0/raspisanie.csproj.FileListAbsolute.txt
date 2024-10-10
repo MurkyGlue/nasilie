@@ -1,0 +1,5 @@
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.csproj.AssemblyReference.cache
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.GeneratedMSBuildEditorConfig.editorconfig
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.AssemblyInfoInputs.cache
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.AssemblyInfo.cs
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.csproj.CoreCompileInputs.cache
