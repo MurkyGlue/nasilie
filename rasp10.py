@@ -30,12 +30,11 @@ pygame.init()
 while True:
     sc.fill((40, 40, 40))
     t = time.asctime(time.localtime(time.time()))
-    
     hm = int(t[11:13]) + float(t[14:16])/100
     day = days.index(t[0:3])
     if hm > 18:
         hm = 0.0
-        if day < 6:day = days.index(t[0:3])+1
+        if day < 6:day += 1
         else:day = 0
     for i in range(len(bells[0])):
         if bells[0][i] <= hm <= bells[1][i]:check = True;break
