@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sqrt")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d0416df06b72b6194f4c19dfa125bd180b9a73b")]
 [assembly: System.Reflection.AssemblyProductAttribute("sqrt")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sqrt")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

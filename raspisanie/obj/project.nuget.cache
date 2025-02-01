@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "uZ6wI833PNtjQxqB7EOqy1iR6tcFohgsor7rHjJABUkzdLKpLH8Xni11sO5wtaiBS0hVGKTm+lnJEGUMTjvN6Q==",
+  "dgSpecHash": "3TzRANMqmbU=",
   "success": true,
   "projectFilePath": "D:\\nasilie\\raspisanie\\raspisanie.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\gdach\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\gdach\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\gdach\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\gdach\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.20\\microsoft.netcore.app.host.win-x64.7.0.20.nupkg.sha512"
+  ],
   "logs": []
 }

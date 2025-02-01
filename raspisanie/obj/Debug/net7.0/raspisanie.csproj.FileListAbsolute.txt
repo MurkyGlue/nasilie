@@ -1,5 +1,15 @@
-D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.csproj.AssemblyReference.cache
 D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.GeneratedMSBuildEditorConfig.editorconfig
 D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.AssemblyInfoInputs.cache
 D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.AssemblyInfo.cs
 D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.csproj.CoreCompileInputs.cache
+D:\nasilie\raspisanie\bin\Debug\net7.0\raspisanie.exe
+D:\nasilie\raspisanie\bin\Debug\net7.0\raspisanie.deps.json
+D:\nasilie\raspisanie\bin\Debug\net7.0\raspisanie.runtimeconfig.json
+D:\nasilie\raspisanie\bin\Debug\net7.0\raspisanie.dll
+D:\nasilie\raspisanie\bin\Debug\net7.0\raspisanie.pdb
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.sourcelink.json
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.dll
+D:\nasilie\raspisanie\obj\Debug\net7.0\refint\raspisanie.dll
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.pdb
+D:\nasilie\raspisanie\obj\Debug\net7.0\raspisanie.genruntimeconfig.cache
+D:\nasilie\raspisanie\obj\Debug\net7.0\ref\raspisanie.dll
