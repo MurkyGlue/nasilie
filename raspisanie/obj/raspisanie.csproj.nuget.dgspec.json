@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\nasilie\\sqrt\\sqrt.csproj": {}
+    "D:\\nasilie\\raspisanie\\raspisanie.csproj": {}
   },
   "projects": {
-    "D:\\nasilie\\sqrt\\sqrt.csproj": {
+    "D:\\nasilie\\raspisanie\\raspisanie.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\nasilie\\sqrt\\sqrt.csproj",
-        "projectName": "sqrt",
-        "projectPath": "D:\\nasilie\\sqrt\\sqrt.csproj",
+        "projectUniqueName": "D:\\nasilie\\raspisanie\\raspisanie.csproj",
+        "projectName": "raspisanie",
+        "projectPath": "D:\\nasilie\\raspisanie\\raspisanie.csproj",
         "packagesPath": "C:\\Users\\gdach\\.nuget\\packages\\",
-        "outputPath": "D:\\nasilie\\sqrt\\obj\\",
+        "outputPath": "D:\\nasilie\\raspisanie\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -22,15 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -47,8 +47,8 @@
         "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "imports": [
             "net461",
             "net462",
@@ -63,19 +63,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
+              "version": "[7.0.20, 7.0.20]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.36, 6.0.36]"
+              "version": "[7.0.20, 7.0.20]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
+              "version": "[7.0.20, 7.0.20]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
+              "version": "[7.0.20, 7.0.20]"
             }
           ],
           "frameworkReferences": {
