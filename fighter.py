@@ -4,10 +4,13 @@ d = False
 g = True
 f = True
 s = False
-c = 300
+c = 300 #время атаки
+t = 0  #время дэша
+cd = 300  #время бессмертия
+h = False   #проверка получения урона
 class GG():
     
-    def __init__(self, hp, damage, x, y, speedX, speedx, speedY, backspeed, sizeX, sizeY, jump, isdrop, isatk, atk, atkrange, isalive, isdown, isup):
+    def __init__(self, hp, damage, x, y, speedX, speedx, speedY, backspeed, sizeX, sizeY, jump, isdrop, isatk, atk, atkrange, isalive, isdown, isup, movedir, isdash, ismoverigth, ismoveleft):
         self.hp = hp
         self.damage = damage
         self.x = x
@@ -26,19 +29,30 @@ class GG():
         self.isalive = isalive
         self.isdown = isdown
         self.isup = isup
+        self.movedir = movedir
+        self.isdash = isdash
+        self.ismoveright = ismoverigth
+        self.ismoveleft = ismoveleft
 
     def jump(self):
         if self.isjump:
             self.speedY += 0.01
     
     def stop(self, e):
-        global b, d, g, f, s
+        global b, d, g, f, s, cd, h
         try:
             e.hp
-            if e.x - self.width <= self.x <= e.x + e.width and e.y -self.height < self.y < e.y + e.height:
+            if h and cd > 0:
+                cd -= 1
+                print(cd)
+            elif e.x - self.width <= self.x <= e.x + e.width and e.y -self.height < self.y < e.y + e.height:
                 self.isdrop = True
                 b = True
+                h = True
                 hit(e, self)
+            else:
+                cd = 300
+                h = False
         except AttributeError:
             
             if e.x - self.width <= self.x <= e.x + e.width and e.y -self.height < self.y < e.y + e.height:
@@ -52,8 +66,7 @@ class GG():
                     self.speedY = 0
                     g = False
                     self.isjump = False
-                #else:
-                    #self.isjump = True
+
             elif self.y+ self.height < e.y and not e.x - self.width <= self.x <= e.x + e.width:
                 self.isjump = True
             
@@ -70,7 +83,7 @@ class GG():
                 self.speedx = 0
 
     def attack(self, e):
-        global c
+        global c, b
         if c < 150:
             if self.isdown:
                 sword = Block(self.x+self.width/2-self.height/4, self.y+self.height,  self.height/2, self.atkrange)
@@ -89,15 +102,17 @@ class GG():
                     self.speedY = -2
                     self.isjump = True
                 hit(self, e)
+                self.isdrop = True
+                b = True
                 print(e.hp)
-            self.isatk = False
+            self.isatk = False 
         if c <= 300:
             c += 1
 
 
             
 
-    def drop(self, e):
+    def drop(self, e, back):
         global b
         if self.isdrop:
             if not self.x + self.width/2 < e.x + e.width/2:
@@ -107,7 +122,7 @@ class GG():
                 if self.speedY < -2:
                     self.speedY = -2
             if b:
-                self.backspeed = -2.5
+                self.backspeed = back
                 b = False
             else:
                 self.backspeed += 0.01
@@ -116,18 +131,40 @@ class GG():
                     self.backspeed = 0
             if not self.x + self.width/2 < e.x + e.width/2:
                 self.backspeed = -self.backspeed
+    
+    def dash(self):
+        global t
+        if self.isdash:
+            if self.movedir:
+                self.speedX = 3
+            else:
+                self.speedx = -3
+            t += 1
+            if t > 100:
+                self.isdash = False
+                if self.ismoveright:
+                    self.speedX = 0.8
+                elif self.ismoveleft:
+                    self.speedx = -0.8
+                else:
+                    self.speedX = 0
+                    self.speedx = 0
                 
-                
+  
     def moving(self):
-        global c
+        global c, t
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_d:
                     self.speedX = 0.8
+                    self.movedir = True
+                    self.ismoveright = True
                 if event.key == pygame.K_a:
                     self.speedx = -0.8
+                    self.movedir = False
+                    self.ismoveleft = True
                 if event.key == pygame.K_s:
                     self.isdown = True
                 elif event.key == pygame.K_w:
@@ -135,11 +172,16 @@ class GG():
                 if event.key == pygame.K_SPACE and not self.isjump:
                     self.isjump = True
                     self.speedY = -3
+                if event.key == pygame.K_LSHIFT:
+                    self.isdash = True
+                    t = 0
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_d:
                     self.speedX = 0
+                    self.ismoveright = False
                 if event.key == pygame.K_a:
                     self.speedx = 0
+                    self.ismoveleft = False
                 if event.key == pygame.K_s:
                     self.isdown = False
                 elif event.key == pygame.K_w:
@@ -172,9 +214,7 @@ class Enemy():
         self.height = sizeY
     
     def stop(self, e):
-        if e.x - self.width <= self.x <= e.x + e.width and e.y -self.height < self.y < e.y + e.height:
-            return True
-        return False
+        return e.x - self.width <= self.x <= e.x + e.width and e.y -self.height < self.y < e.y + e.height
 
     
 
@@ -196,7 +236,7 @@ screen = pygame.display.set_mode((screenW, screenH))
 
 ground = Block(0, 800, screenW, 280)
 block = Block(1000, 199, 300, 500)
-hero = GG(hp = 5, damage = 1, x = 500, y = 700, speedX = 0, speedx = 0, speedY = 0, backspeed = 0, sizeX = 70, sizeY = 100, jump = False, isdrop = False, isatk = False, atk = False, atkrange = 200, isalive = True, isdown = False, isup = False)
+hero = GG(hp = 5, damage = 1, x = 500, y = 700, speedX = 0, speedx = 0, speedY = 0, backspeed = 0, sizeX = 70, sizeY = 100, jump = False, isdrop = False, isatk = False, atk = False, atkrange = 200, isalive = True, isdown = False, isup = False, movedir = True, isdash = False, ismoverigth= False, ismoveleft= False)
 enemy = Enemy(20, 1, 1400, 600, 0, 0, 140, 200)
 
 
@@ -207,7 +247,6 @@ while True:
     if hero.isalive:
         pygame.draw.rect(screen, (255, 0, 0), [hero.x, hero.y, hero.width, hero.height])
     pygame.draw.rect(screen, (0, 255, 0), [enemy.x, enemy.y, enemy.width, enemy.height])
-    #pygame.draw.rect(screen, (100, 100, 255), [block.x, block.y, block.width, block.height])
     pygame.draw.rect(screen, (0, 0, 0), [45, 45, 510, 60])
     pygame.draw.rect(screen, (200, 0, 0), [50, 50, hero.hp*100, 50])
     hero.attack(enemy)
@@ -222,10 +261,11 @@ while True:
 
     if hero.isalive:
         hero.jump()
-        hero.stop(enemy)
-        #hero.stop(block)
+        if not hero.isdash:
+            hero.stop(enemy)
         hero.stop(ground)
-        hero.drop(enemy)
+        hero.drop(enemy, -2.5)
+        hero.dash()
         hero.dead()
     
         hero.moving()
